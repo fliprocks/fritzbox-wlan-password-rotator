@@ -11,17 +11,6 @@ def get_bool_value(env, default):
         return default
 
 
-def load_version():
-    version_file = "/app/version.txt"
-
-    if os.path.exists(version_file):
-        with open(version_file, "r") as f:
-
-            return f.read().strip()
-
-    return "Unknown"
-
-
 PW_CHARSET_ASCII_LOWERCASE = get_bool_value(
     os.environ.get('PW_CHARSET_ASCII_LOWERCASE'), True)
 PW_CHARSET_ASCII_UPPERCASE = get_bool_value(
