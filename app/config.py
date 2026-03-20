@@ -1,6 +1,7 @@
 import os
 import string
 
+
 def get_bool_value(env, default):
     if env in ['true', 'True']:
         return True
@@ -8,7 +9,8 @@ def get_bool_value(env, default):
         return False
     else:
         return default
-    
+
+
 def load_version():
     version_file = "/app/version.txt"
 
@@ -16,16 +18,21 @@ def load_version():
         with open(version_file, "r") as f:
 
             return f.read().strip()
-        
+
     return "Unknown"
 
-PW_CHARSET_ASCII_LOWERCASE = get_bool_value(os.environ.get('PW_CHARSET_ASCII_LOWERCASE'), True)
-PW_CHARSET_ASCII_UPPERCASE = get_bool_value(os.environ.get('PW_CHARSET_ASCII_UPPERCASE'), True)
+
+PW_CHARSET_ASCII_LOWERCASE = get_bool_value(
+    os.environ.get('PW_CHARSET_ASCII_LOWERCASE'), True)
+PW_CHARSET_ASCII_UPPERCASE = get_bool_value(
+    os.environ.get('PW_CHARSET_ASCII_UPPERCASE'), True)
 PW_CHARSET_DIGITS = get_bool_value(os.environ.get('PW_CHARSET_DIGITS'), True)
-PW_CHARSET_PUNCTUATION = get_bool_value(os.environ.get('PW_CHARSET_PUNCTUATION'), True)
+PW_CHARSET_PUNCTUATION = get_bool_value(
+    os.environ.get('PW_CHARSET_PUNCTUATION'), True)
 
 if PW_CHARSET_PUNCTUATION:
-    PW_CHARSET_PUNCTUATION_USE_CUSTOM = get_bool_value(os.environ.get('PW_CHARSET_PUNCTUATION_USE_CUSTOM'), True)
+    PW_CHARSET_PUNCTUATION_USE_CUSTOM = get_bool_value(
+        os.environ.get('PW_CHARSET_PUNCTUATION_USE_CUSTOM'), True)
 else:
     PW_CHARSET_PUNCTUATION_USE_CUSTOM = False
 
@@ -42,7 +49,8 @@ if pw_length_env.isdigit():
 else:
     PW_LENGTH = 8
 
-CRON_MINUTE, CRON_HOUR, CRON_DAY, CRON_MONTH, CRON_DAY_OF_WEEK = os.environ['CRONTAB_EXPRESSION'].split()
+CRON_MINUTE, CRON_HOUR, CRON_DAY, CRON_MONTH, CRON_DAY_OF_WEEK = os.environ['CRONTAB_EXPRESSION'].split(
+)
 
 FB_ADDRESS = os.environ.get('FB_ADDRESS', '192.168.178.1')
 FB_USER = os.environ['FB_USER']
@@ -59,14 +67,16 @@ WEB_PAGE_TITLE = os.environ.get('WEB_PAGE_TITLE', 'WLAN QR-Code')
 
 WEB_PASSWORD = os.environ.get('WEB_PASSWORD', 'password')
 
-WEB_PUBLIC_ENABLED = get_bool_value(os.environ.get('WEB_PUBLIC_ENABLED'), False)
+WEB_PUBLIC_ENABLED = get_bool_value(
+    os.environ.get('WEB_PUBLIC_ENABLED'), False)
 
 WEB_WELCOME_MESSAGE_CONTENT = os.environ.get('WEB_WELCOME_MESSAGE_CONTENT', '')
 
-WEB_CUSTOM_BACKGROUND = get_bool_value(os.environ.get('WEB_CUSTOM_BACKGROUND'), False)
+WEB_CUSTOM_BACKGROUND = get_bool_value(
+    os.environ.get('WEB_CUSTOM_BACKGROUND'), False)
 
 GUNICORN_PORT = 5000
 
-VERSION = load_version()
+VERSION = os.environ.get('VERSION', 'Unknown version')
 
 DEBUG = get_bool_value(os.environ.get('DEBUG'), False)

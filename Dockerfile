@@ -1,18 +1,18 @@
-FROM python:3-slim
+FROM python:3.10.20-slim-trixie
 
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-ARG VERSION="unknown"
+ARG VERSION=Unknown version
+
+ENV VERSION=${VERSION}
 
 RUN echo "$VERSION" > /app/version.txt
 
-COPY requirements.txt requirements.txt
+COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
 
 EXPOSE 5000
 
