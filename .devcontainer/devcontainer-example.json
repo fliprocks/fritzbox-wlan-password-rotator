@@ -1,0 +1,49 @@
+{
+    "name": "Python 3",
+    "image": "mcr.microsoft.com/devcontainers/python:3-3.14-trixie",
+    "workspaceFolder": "/fritzbox-wlan-password-rotator",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/fritzbox-wlan-password-rotator,type=bind",
+    "runArgs": [
+        "--hostname",
+        "python-devcontainer",
+        "--name",
+        "python-devcontainer"
+    ],
+    "postCreateCommand": "echo \"alias ll='ls -alF'\" >> ~/.bashrc && pip install --no-cache-dir -r requirements.txt",
+    "mounts": [
+        "type=bind,source=${localEnv:HOME}/.ssh/id_ed25519,target=/home/vscode/.ssh/id_ed25519,readonly",
+        "type=bind,source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,readonly",
+        "type=bind,source=/run/host-services/ssh-auth.sock,target=/ssh-agent"
+    ],
+    "containerEnv": {
+        "PW_CHARSET_ASCII_LOWERCASE": "True",
+        "PW_CHARSET_ASCII_UPPERCASE": "True",
+        "PW_CHARSET_DIGITS": "True",
+        "PW_CHARSET_PUNCTUATION": "True",
+        "PW_CHARSET_PUNCTUATION_USE_CUSTOM": "False",
+        "PW_CHARSET_PUNCTUATION_CUSTOM": "-_#+%&/=",
+        "PW_LENGTH": "12",
+        "CRONTAB_EXPRESSION": "0 3 * * *",
+        "FB_ADDRESS": "192.168.178.1",
+        "FB_USER": "user",
+        "FB_PASSWORD": "secret-password",
+        "WLAN_CONFIGURATION": "WLANConfiguration3",
+        "WEB_PAGE_TITLE": "WLAN QR-Code",
+        "WEB_PASSWORD": "password",
+        "WEB_APP_SESSION_MAX_LIFETIME": "30",
+        "WEB_PUBLIC_ENABLED": "False",
+        "WEB_CUSTOM_BACKGROUND": "False",
+        "TZ": "Europe/Berlin",
+        "DEBUG": "False"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-azuretools.vscode-docker",
+                "redhat.vscode-yaml",
+                "eamodio.gitlens",
+                "esbenp.prettier-vscode"
+            ]
+        }
+    }
+}

@@ -1,0 +1,8 @@
+services:
+  fb-pw-rotator:
+    image: "ghcr.io/fliprocks/fritzbox-wlan-password-rotator:latest"
+    ports:
+      - "5000:5000"
+    restart: always
+    env_file:
+      - ./.env

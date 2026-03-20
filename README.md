@@ -6,15 +6,15 @@ The fritzbox-wlan-password-rotator is a simple tool which automatically updates 
 
 ## Features
 
--   Automatic re-creation of your guest WLAN password
--   Password protected web ui to easily access WLAN credentials
--   Dynamic QR code generation for guest WLAN credentials
--   Trigger manual guest WLAN password renew
--   Public page with network credentials for offices or public places e.g. cafes (can be enabled/disabled)
--   Automatic data fetching if the guest WLAN credentials were changed directly on your FRITZ!Box (or somewhere else)
--   Show a custom welcome message (on public page)
--   Show a custom background image ([see images](./images/))
--   Custom CSS
+- Automatic re-creation of your guest WLAN password
+- Password protected web ui to easily access WLAN credentials
+- Dynamic QR code generation for guest WLAN credentials
+- Trigger manual guest WLAN password renew
+- Public page with network credentials for offices or public places e.g. cafes (can be enabled/disabled)
+- Automatic data fetching if the guest WLAN credentials were changed directly on your FRITZ!Box (or somewhere else)
+- Show a custom welcome message (on public page)
+- Show a custom background image ([see images](./images/))
+- Custom CSS
 
 <img src="./images/qr-code_and_credentials.png" alt="qr code in safari" style="width: 700px; margin-right: 20px;"/>
 
@@ -36,20 +36,25 @@ The fritzbox-wlan-password-rotator is deployed in your private network. From the
 
 The application basically consists of four parts:
 
--   Webserver - display the credentials or trigger manual password renewals
--   Password generator - creating random passwords according to your specifications
--   Communication interface to your FRITZ!Box (done via [fritzconnection](https://github.com/kbr/fritzconnection))
--   Scheduler - run jobs like password renewals or fetching credentials automatically
+- Webserver - display the credentials or trigger manual password renewals
+- Password generator - creating random passwords according to your specifications
+- Communication interface to your FRITZ!Box (done via [fritzconnection](https://github.com/kbr/fritzconnection))
+- Scheduler - run jobs like password renewals or fetching credentials automatically
 
 ## Deploy the image
 
+The docker image will be available on [ghci.io](https://ghcr.io) as well as on [hub.docker.com](https://hub.docker.com).
+
+- ghcr.io/fliprocks/fritzbox-wlan-password-rotator:latest
+- phipzzz/fritzbox-wlan-password-rotator:latest
+
 ### Prerequisites
 
--   Using a compatible FRITZ!Box for WLAN (or at least for the WLAN you want to update regularly)
--   Admin access to your FRITZ!Box
--   Having some kind of Server/NAS/Raspberry Pi running 24/7
--   Having Docker installed and running
--   **optional** _- Creating a dedicated FRITZ!Box user (technically, every admin account works, but I recommend using a dedicated one). See https://en.avm.de/service/knowledge-base/dok/FRITZ-Box-4020/1522_Accessing-FRITZ-Box-from-the-home-network-with-user-accounts/ for further details and grant "FRITZ!Box settings" privileges._
+- Using a compatible FRITZ!Box for WLAN (or at least for the WLAN you want to update regularly)
+- Admin access to your FRITZ!Box
+- Having some kind of Server/NAS/Raspberry Pi running 24/7
+- Having Docker installed and running
+- **optional** _- Creating a dedicated FRITZ!Box user (technically, every admin account works, but I recommend using a dedicated one). See https://en.avm.de/service/knowledge-base/dok/FRITZ-Box-4020/1522_Accessing-FRITZ-Box-from-the-home-network-with-user-accounts/ for further details and grant "FRITZ!Box settings" privileges._
 
 ### Configure
 
@@ -76,17 +81,17 @@ docker run \
     --detach \
     --restart=always \
     --name fb-pw-rotator \
-    phipzzz/fritzbox-wlan-password-rotator:latest
+    ghcr.io/fliprocks/fritzbox-wlan-password-rotator:latest
 ```
 
 #### docker compose (Recommended)
 
-Copy the [docker-compose.yml](./docker-compose.yml) and [.env](./.env) to your project directory. Update the .env-file according to your personal needs.
+Copy the [compose.yaml](./compose.yaml) and [.env](./.env) to your project directory. Update the .env-file according to your personal needs.
 
 ```bash
 services:
     fb-pw-rotator:
-        image: "phipzzz/fritzbox-wlan-password-rotator:latest"
+        image: "ghcr.io/fliprocks/fritzbox-wlan-password-rotator:latest"
         ports:
             - "5000:5000"
         restart: always
@@ -104,10 +109,10 @@ docker compose up -d
 #### Build docker image from source
 
 ```bash
-git clone https://github.com/phipzzz/fritzbox-wlan-password-rotator.git
+git clone https://github.com/fliprocks/fritzbox-wlan-password-rotator.git
 cd fritzbox-wlan-password-rotator
 git tag
-git checkout # <tag you want to build>
+git checkout <tag you want to build>
 docker build -t fritzbox-wlan-password-rotator:<your tag> .
 ```
 
@@ -121,21 +126,19 @@ It is also possible to run the application without Docker, but this requires man
 
 Following FRITZ!Boxes were tested successfully. Feel free to add further ones. I guess almost all current models will work but they haven't been tested so far.
 
--   **FRITZ!Box 7590 AX**
+- **FRITZ!Box 7590 AX**
+    - FRITZ!OS 8.20
+    - FRITZ!OS 8.02
+    - FRITZ!OS 8.00
 
-    -   FRITZ!OS 8.20
-    -   FRITZ!OS 8.02
-    -   FRITZ!OS 8.00
+- **FRITZ!Box 7530**
+    - FRITZ!OS 8.20
+    - FRITZ!OS 8.02
+    - FRITZ!OS 8.00
 
--   **FRITZ!Box 7530**
-
-    -   FRITZ!OS 8.20
-    -   FRITZ!OS 8.02
-    -   FRITZ!OS 8.00
-
--   **FRITZ!Box 7490**
-    -   FRITZ!OS 7.59
-    -   FRITZ!OS 7.57
+- **FRITZ!Box 7490**
+    - FRITZ!OS 7.59
+    - FRITZ!OS 7.57
 
 ## Disclaimer
 
