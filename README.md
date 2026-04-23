@@ -127,6 +127,7 @@ It is also possible to run the application without Docker, but this requires man
 Following FRITZ!Boxes were tested successfully. Feel free to add further ones. I guess almost all current models will work but they haven't been tested so far.
 
 - **FRITZ!Box 7590 AX**
+    - FRITZ!OS 8.25
     - FRITZ!OS 8.20
     - FRITZ!OS 8.02
     - FRITZ!OS 8.00

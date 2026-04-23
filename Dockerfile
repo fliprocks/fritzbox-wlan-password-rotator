@@ -1,4 +1,4 @@
-FROM python:3.14.3-slim-trixie
+FROM python:3.14.4-slim-trixie
 
 ENV PYTHONUNBUFFERED=1
 
@@ -7,8 +7,6 @@ WORKDIR /app
 ARG VERSION=Unknown version
 
 ENV VERSION=${VERSION}
-
-RUN echo "$VERSION" > /app/version.txt
 
 COPY . .
 
